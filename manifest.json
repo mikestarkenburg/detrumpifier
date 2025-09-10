@@ -1,23 +1,36 @@
 {
   "manifest_version": 3,
-  "name": "Trump Filter for Google News",
-  "version": "1.0",
-  "description": "Removes articles referencing Donald Trump from Google News pages.",
+  "name": "Detrumpifier - Multi-Site Trump Filter",
+  "version": "2.0.0",
+  "description": "Remove Trump-related articles from multiple news websites",
   "permissions": [
-    "activeTab",
-    "scripting",
-    "storage"
+    "storage",
+    "activeTab"
   ],
   "host_permissions": [
-    "*://news.google.com/*"
+    "*://news.google.com/*",
+    "*://*.cnn.com/*",
+    "*://*.bbc.com/*",
+    "*://*.reuters.com/*",
+    "*://*.nytimes.com/*",
+    "*://*.washingtonpost.com/*",
+    "*://*.foxnews.com/*",
+    "*://*.apnews.com/*"
   ],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["*://news.google.com/*"],
-      "js": ["content.js"]
+      "matches": [
+        "*://news.google.com/*",
+        "*://*.cnn.com/*",
+        "*://*.bbc.com/*",
+        "*://*.reuters.com/*",
+        "*://*.nytimes.com/*"
+      ],
+      "js": ["content-multisite.js"],
+      "run_at": "document_end"
     }
   ],
   "action": {
@@ -28,10 +41,10 @@
       "128": "icons/icon128.png"
     }
   },
+  "options_page": "options.html",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   }
 }
-

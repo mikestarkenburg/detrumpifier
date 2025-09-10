@@ -4,24 +4,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const emptyState = document.getElementById('emptyState');
   const articleCount = document.getElementById('articleCount');
 
-  // Get current tab ID to retrieve stored articles
-  chrome.tabs.getCurrent(function(tab) {
-    if (tab) {
-      loadFilteredArticles(tab.id);
-    }
-  });
+  // Load filtered articles directly from storage
+  loadFilteredArticles();
 
-  function loadFilteredArticles(tabId) {
-    // Request filtered articles from background script
-    chrome.runtime.sendMessage({
-      action: "getFilteredData",
-      tabId: tabId
-    }, function(response) {
+  function loadFilteredArticles() {
+    // Get filtered articles from chrome storage
+    chrome.storage.local.get(['filteredArticles'], function(result) {
       loading.style.display = 'none';
       
-      if (response && response.articles && response.articles.length > 0) {
-        displayArticles(response.articles);
-        articleCount.textContent = response.articles.length;
+      if (result.filteredArticles && result.filteredArticles.length > 0) {
+        displayArticles(result.filteredArticles);
+        articleCount.textContent = result.filteredArticles.length;
       } else {
         showEmptyState();
       }
@@ -53,15 +46,21 @@ document.addEventListener('DOMContentLoaded', function() {
       <p class="article-content">${escapeHtml(content)}</p>
       <div class="article-meta">
         <span>Article ${index + 1}</span>
-        ${link !== '#' ? '<a href="#" class="read-more">Read more</a>' : ''}
+        ${link && link !== '#' ? '<a href="#" class="read-more" data-link="' + escapeHtml(link) + '">Read more</a>' : ''}
       </div>
     `;
     
     // Add click handler to open original article
-    if (link !== '#') {
+    if (link && link !== '#') {
       card.addEventListener('click', function(e) {
         e.preventDefault();
-        chrome.tabs.create({ url: link });
+        if (e.target.classList.contains('read-more')) {
+          // If clicking on "Read more", open the link
+          chrome.tabs.create({ url: e.target.getAttribute('data-link') });
+        } else {
+          // If clicking anywhere else on the card, open the link
+          chrome.tabs.create({ url: link });
+        }
       });
       
       card.style.cursor = 'pointer';

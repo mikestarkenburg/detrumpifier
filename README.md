@@ -1,12 +1,11 @@
 # detrumpifier
-This chrome extension will remove any articles with Trump in the headline from your google news feed. This extension only works on Google news pages (for now).  
+This Chrome extension removes any articles with Trump references from your news feeds across multiple major news websites including Google News, CNN, BBC, Reuters, and The New York Times.
 ****
 
-This is not a political statement of any kind.  OR, it is a political statement of EVERY KIND!!!!  It's got somethign to make everyone happy.  
+This is not a political statement of any kind.  OR, it is a political statement of EVERY KIND!!!!  It's got something to make everyone happy.  
 
-If you are positive on Trump, this extension will make you happy by removing the mainstream media distortions of his words from your feed.
-  
-If you are negative on Trump, this extension will make you happy by removing all the triggering things his admistration is saying or doing from your feed.  
+If you are positive on Trump, this extension will make you happy by removing the mainstream media distortions of his words from your feed.  
+If you are negative on Trump, this extension will make you happy by removing all the triggering things his administration is saying or doing from your feed.  
 
 Either way, everyone wins!  
 
@@ -28,17 +27,40 @@ This extension is designed for users who are willing to turn on Chrome's develop
 
 ## Usage
 
-Once installed, the extension operates only on Google News pages (`news.google.com`) (for now).  Simply navigate to [Google News](https://news.google.com ). The extension is designed to automatically detect and hide articles that contain references to Donald Trump as the page loads. This provides a cleaner news feed without requiring any manual intervention.
+Once installed, the extension automatically operates on supported news websites:
+- **Google News** (`news.google.com`)
+- **CNN** (`cnn.com`)
+- **BBC News** (`bbc.com`)
+- **Reuters** (`reuters.com`)
+- **The New York Times** (`nytimes.com`)
+
+Simply navigate to any of these news sites. The extension automatically detects and hides articles that contain references to Donald Trump as the page loads, providing a cleaner news feed without requiring any manual intervention.
 
 ### Manual Controls (via Extension Popup)
 
 For more control, you can interact with the extension's popup:
 
 1.  **Click the Extension Icon**: Click on the icon in your Chrome toolbar (the blue filter icon).
-2.  **Filter Current Page**: If you arrive at a Google News page and notice articles that weren't filtered, or if content loads dynamically, you can click the **"Filter Current Page"** button within the popup to re-apply the filtering logic to the currently visible articles.
-3.  **Open Filtered View**: To see a curated list of articles that passed the filter, click the **"Open Filtered View"** button. This will open a new tab displaying only the articles deemed free of Trump references, presented in a clean, minimalist layout.
-4.  **Monitor Statistics**: The popup also provides real-time statistics, showing you how many articles were filtered out versus the total number of articles detected on the page, giving you immediate feedback on the extension's activity.
+2.  **Filter Current Page**: If articles weren't filtered or content loads dynamically, click the **"Filter Current Page"** button to re-apply filtering.
+3.  **Open Filtered View**: Click the **"Open Filtered View"** button to see all non-Trump articles in a clean, distraction-free layout (works on all supported sites).
+4.  **Monitor Statistics**: The popup shows real-time statistics of filtered vs. total articles on the current page.
+5.  **Settings**: Click the gear icon to access settings where you can:
+    - Enable/disable filtering for specific sites
+    - Add custom keywords to filter
+    - View lifetime statistics
+    - Export/import your settings
 
+
+## Mobile Support
+
+While Chrome mobile doesn't support extensions, you have several options:
+
+- **Bookmarklet**: Works on any mobile browser (see `MOBILE_USAGE.md`)
+- **Kiwi Browser** (Android): Supports Chrome extensions directly
+- **Firefox Mobile** (Android): Extension support available
+- **Safari** (iOS): Via Userscripts app
+
+See `MOBILE_USAGE.md` for detailed instructions.
 
 VERY INTERESTED to see what people think about this and what enhancements they might want, don't be shy!   
 
@@ -50,9 +72,9 @@ SMALL PRINT FOLLOWS:
 Contributing:  This extension is designed to be simple and focused. If you'd like to contribute:
   1. Fork the repository
   2. Make your changes
-  3. Test thoroughly on Google News
+  3. Test thoroughly on all supported news sites
   4. Submit a pull request... sorry, can't give more guidance than that... 
 
 License: MIT License - feel free to modify and distribute as needed.
 
-Disclaimer:  This extension is for personal use and educational purposes. It modifies the display of web content locally and does not affect the original Google News service.  No content ever leaves your computer and goes anywhere sinister.  Honestly, the whole thing is really a goof, but once I built it I realized it really did calm down my news reading day.  Make what you will of that....
+Disclaimer:  This extension is for personal use and educational purposes. It modifies the display of web content locally and does not affect the original news services.  No content ever leaves your computer and goes anywhere sinister.  Honestly, the whole thing is really a goof, but once I built it I realized it really did calm down my news reading day.  Make what you will of that....

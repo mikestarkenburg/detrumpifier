@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Detrumpifier Settings</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      background: #f5f5f5;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      margin: 0 0 8px 0;
+      color: #1f1f1f;
+      font-size: 24px;
+    }
+    
+    .subtitle {
+      color: #666;
+      margin-bottom: 24px;
+    }
+    
+    .site-list {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .site-item {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid #e0e0e0;
+      transition: background-color 0.2s;
+    }
+    
+    .site-item:last-child {
+      border-bottom: none;
+    }
+    
+    .site-item:hover {
+      background-color: #f8f8f8;
+    }
+    
+    .site-info {
+      flex: 1;
+    }
+    
+    .site-name {
+      font-weight: 500;
+      color: #1f1f1f;
+      margin-bottom: 4px;
+    }
+    
+    .site-url {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .toggle {
+      position: relative;
+      width: 48px;
+      height: 24px;
+      background: #ccc;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .toggle.active {
+      background: #0b57d0;
+    }
+    
+    .toggle-slider {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .toggle.active .toggle-slider {
+      transform: translateX(24px);
+    }
+    
+    .stats {
+      margin-top: 24px;
+      padding: 16px;
+      background: #f8f8f8;
+      border-radius: 8px;
+    }
+    
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    
+    .stat-row:last-child {
+      margin-bottom: 0;
+    }
+    
+    .stat-label {
+      color: #666;
+    }
+    
+    .stat-value {
+      font-weight: 500;
+      color: #1f1f1f;
+    }
+    
+    .section {
+      margin-top: 32px;
+    }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      color: #1f1f1f;
+    }
+    
+    .custom-keywords {
+      width: 100%;
+      min-height: 100px;
+      padding: 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      resize: vertical;
+    }
+    
+    .help-text {
+      font-size: 14px;
+      color: #666;
+      margin-top: 8px;
+    }
+    
+    .button {
+      background: #0b57d0;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .button:hover {
+      background: #0842a0;
+    }
+    
+    .button-secondary {
+      background: white;
+      color: #0b57d0;
+      border: 1px solid #0b57d0;
+    }
+    
+    .button-secondary:hover {
+      background: #f0f7ff;
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    
+    .support-section {
+      border-top: 1px solid #e0e0e0;
+      padding-top: 32px;
+    }
+    
+    .support-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 12px;
+      padding: 24px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+    
+    .support-content {
+      flex: 1;
+    }
+    
+    .support-text {
+      margin: 0 0 16px 0;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    
+    .coffee-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFDD00;
+      color: #000;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.2s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .coffee-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      background: #FFE838;
+    }
+    
+    .coffee-stats {
+      text-align: center;
+      padding-left: 24px;
+    }
+    
+    .coffee-number {
+      font-size: 48px;
+      display: block;
+      margin-bottom: 4px;
+    }
+    
+    .coffee-label {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    
+    @media (max-width: 600px) {
+      .support-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .coffee-stats {
+        margin-top: 20px;
+        padding-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Detrumpifier Settings</h1>
+    <p class="subtitle">Choose which sites to filter Trump content from</p>
+    
+    <div class="site-list">
+      <div class="site-item">
+        <div class="site-info">
+          <div class="site-name">Google News</div>
+          <div class="site-url">news.google.com</div>
+        </div>
+        <div class="toggle active" data-site="news.google.com">
+          <div class="toggle-slider"></div>
+        </div>
+      </div>
+      
+      <div class="site-item">
+        <div class="site-info">
+          <div class="site-name">CNN</div>
+          <div class="site-url">cnn.com</div>
+        </div>
+        <div class="toggle" data-site="cnn.com">
+          <div class="toggle-slider"></div>
+        </div>
+      </div>
+      
+      <div class="site-item">
+        <div class="site-info">
+          <div class="site-name">BBC News</div>
+          <div class="site-url">bbc.com/news</div>
+        </div>
+        <div class="toggle" data-site="bbc.com">
+          <div class="toggle-slider"></div>
+        </div>
+      </div>
+      
+      <div class="site-item">
+        <div class="site-info">
+          <div class="site-name">Reuters</div>
+          <div class="site-url">reuters.com</div>
+        </div>
+        <div class="toggle" data-site="reuters.com">
+          <div class="toggle-slider"></div>
+        </div>
+      </div>
+      
+      <div class="site-item">
+        <div class="site-info">
+          <div class="site-name">The New York Times</div>
+          <div class="site-url">nytimes.com</div>
+        </div>
+        <div class="toggle" data-site="nytimes.com">
+          <div class="toggle-slider"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="stats">
+      <div class="stat-row">
+        <span class="stat-label">Total articles filtered (all time):</span>
+        <span class="stat-value">1,337</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Articles filtered today:</span>
+        <span class="stat-value">42</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Active sites:</span>
+        <span class="stat-value">1 of 5</span>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2 class="section-title">Custom Keywords</h2>
+      <textarea class="custom-keywords" placeholder="Add custom keywords to filter (one per line)&#10;Example:&#10;MAGA&#10;Mar-a-Lago&#10;Trump Tower"></textarea>
+      <p class="help-text">These keywords will be filtered in addition to Trump-related terms. Use with caution as they may filter unrelated content.</p>
+    </div>
+    
+    <div class="section">
+      <div class="button-group">
+        <button class="button">Save Settings</button>
+        <button class="button button-secondary">Export Settings</button>
+        <button class="button button-secondary">Reset to Defaults</button>
+      </div>
+    </div>
+    
+    <div class="section support-section">
+      <h2 class="section-title">Support Development</h2>
+      <div class="support-card">
+        <div class="support-content">
+          <p class="support-text">Enjoying a Trump-free news experience? Consider supporting the developer!</p>
+          <a href="https://coff.ee/detrumpifier" target="_blank" class="coffee-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2 21h18v-2H2M20 8h-2V5h2m0-2h-2v.1A5.002 5.002 0 0 0 11 0C8.58 0 6.47 1.44 5.5 3.5C4.08 3.08 2.5 4.08 2.5 5.5C2.5 6.21 2.85 6.85 3.4 7.2C3.15 7.87 3 8.57 3 9.3V11a6.022 6.022 0 0 0 5.19 5.98A5.003 5.003 0 0 0 13 20c1.82 0 3.42-.97 4.3-2.43A3.022 3.022 0 0 0 20 15h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2z"/>
+            </svg>
+            Buy Me A Coffee
+          </a>
+        </div>
+        <div class="coffee-stats">
+          <div class="coffee-stat">
+            <span class="coffee-number">☕</span>
+            <span class="coffee-label">Every coffee helps!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="options.js"></script>
+</body>
+</html>
